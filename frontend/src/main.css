@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+@theme {
+  --color-tisco-light: #f5f7fa;
+  --color-tisco-gray: #a7b1bc;
+  --color-tisco-navy: #0a3764;
+  --color-tisco-green: #2ecc71;
+  --color-tisco-yellow: #f1c40f;
+  --color-tisco-red: #e74c3c;
+}
+
+@font-face {
+  font-family: Doto;
+  src: url(./assets/fonts/Doto-VariableFont_ROND\,wght.ttf);
+}
+
+@font-face {
+  font-family: Lato-Black;
+  src: url(./assets/fonts/Lato-Black.ttf);
+}
+@font-face {
+  font-family: Lato-Black;
+  src: url(./assets/fonts/Lato-Black.ttf);
+}
+@font-face {
+  font-family: Lato-Black;
+  src: url(./assets/fonts/Lato-Black.ttf);
+}
