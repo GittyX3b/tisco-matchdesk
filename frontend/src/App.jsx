@@ -9,26 +9,16 @@ import { TimerBoard } from "./components/TimerBoard";
 const App = () => {
   const [configVisible, setConfigVisibility] = useState(false);
   const [data, setData] = useState({
-    team: {
-      home: {
-        name: "",
-        score: 0,
-        players: [],
-      },
-      away: {
-        name: "",
-        score: 0,
-        players: [],
-      },
-    },
-    game: {
-      period: {
-        number: 2, // number of periods per match
-        names: ["", "", "Halbzeit", "Drittel", "Viertel"], // name of 1 period
-        duration: 15, // duration in minutes of 1 period
-        active: 1, // counter for current match
-      },
-    },
+    team_home_name: "",
+    team_home_score: 0,
+    team_home_players: [],
+    team_away_score: 0,
+    team_away_players: [],
+    team_away_name: "",
+    match_period_number: 2, // number of periods per match
+    match_period_names: ["", "", "Halbzeit", "Drittel", "Viertel"], // name of 1 period
+    match_period_duration: 15, // duration in minutes of 1 period
+    match_period_active: 1, // counter for current match
   });
 
   return (

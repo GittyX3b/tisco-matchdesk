@@ -1,83 +1,164 @@
 export const ConfigModal = ({ isVisible, setVisibility, data, setData }) => {
+  const handleChange = (e) => {
+    setData({ ...data, [e.target.name]: e.target.value });
+  };
+
+  const handleReset = () => {
+    setData({
+      team_home_name: "",
+      team_home_score: 0,
+      team_home_players: [],
+      team_away_score: 0,
+      team_away_players: [],
+      team_away_name: "",
+      match_period_number: 2, // number of periods per match
+      match_period_names: ["", "", "Halbzeit", "Drittel", "Viertel"], // name of 1 period
+      match_period_duration: 15, // duration in minutes of 1 period
+      match_period_active: 1, // counter for current match
+    });
+  };
+
   return (
     <aside
       id="config-container"
-      className="absolute z-50 min-h-screen w-full bg-[rgba(0,0,0,0.4)] p-10"
+      className="absolute z-50 min-h-screen w-full overflow-auto bg-[rgba(0,0,0,0.4)] p-10"
       hidden={!isVisible}
     >
       <div className="m-auto w-full max-w-[1600px] rounded-xl bg-white p-10">
-        <h1>TiSco - Zeitmanagement für Sportveranstaltungen</h1>
+        <div className="flex items-end justify-between">
+          <img
+            src="src/assets/icons/Tisco_logo_icon_transparent_xs.webp"
+            alt="TiSco-Logo"
+          />
+          <h1>TiSco - Zeitmanagement für Sportveranstaltungen</h1>
+        </div>
         <h2>Einstellungen</h2>
-        <form className="bg-tisco-light mb-5 flex gap-5 rounded-xl p-5">
-          <fieldset className="w-1/3 rounded-xl bg-white p-5">
+        <form className="bg-tisco-light mb-5 flex flex-wrap gap-5 rounded-xl p-5">
+          <fieldset className="grow rounded-xl bg-white p-5">
             <summary className="list-none pb-3 font-[Lato-bold] text-lg">
               Heim-Team
             </summary>
             <label
-              htmlFor="team-name-home"
-              className="flex w-full flex-col gap-1 py-5"
+              htmlFor="team_home_name"
+              className="w-ful flex flex-col gap-1 py-5"
             >
               <span className="font-medium">Name:</span>
               <input
                 type="text"
-                id="team-name-home"
-                name="team-name-home"
-                className="border-tisco-navy rounded-md border bg-white px-2 py-1 placeholder:text-sm"
-                placeholder="Tippe den Namen des Heim-Teams ein..."
-                value={data.team.home.name || null}
+                id="team_home_name"
+                name="team_home_name"
+                className="border-tisco-gray rounded-md border bg-white px-2 py-1 placeholder:text-sm"
+                value={data.team_home_name || ""}
+                onChange={handleChange}
               />
+              <span className="text-tisco-gray text-xs">
+                Tippe den Namen des Heim-Teams ein...
+              </span>
             </label>
             <label
-              htmlFor="team-home-players"
+              htmlFor="team_home_players"
               className="flex w-full flex-col gap-1 py-5"
             >
-              <span className="font-medium">Rückennummer (optional):</span>
+              <span className="font-medium">Rückennummern (optional):</span>
               <input
                 type="text"
-                id="team-home-players"
-                name="team-home-players"
-                className="border-tisco-navy rounded-md border bg-white px-2 py-1 placeholder:text-sm"
-                placeholder="Tippe die Rückennummer kommagetrennt ein, z.B. 2,4,7,12 usw. ..."
-                value={data.team.home.players.join(", ") || null}
+                id="team_home_players"
+                name="team_home_players"
+                className="border-tisco-gray rounded-md border bg-white px-2 py-1 placeholder:text-sm"
+                value={data.team_home_players.join(", ") || ""}
+                onChange={handleChange}
               />
+              <span className="text-tisco-gray text-xs">
+                Tippe die Rückennummer kommagetrennt ein, z.B. 2,4,7,12 usw. ...
+              </span>
             </label>
           </fieldset>
-          <fieldset className="w-1/3 rounded-xl bg-white p-5">
+          <fieldset className="grow rounded-xl bg-white p-5">
             <summary className="list-none pb-3 font-[Lato-bold] text-lg">
               Gast-Team
             </summary>
             <label
-              htmlFor="team-name-away"
+              htmlFor="team-away-name"
               className="flex w-full flex-col gap-1 py-5"
             >
               <span className="font-medium">Name:</span>
               <input
                 type="text"
-                id="team-name-away"
-                name="team-name-away"
-                className="border-tisco-navy rounded-md border bg-white px-2 py-1 placeholder:text-sm"
-                placeholder="Tippe den Namen des Gast-Teams ein..."
-                value={data.team.home.name || null}
+                id="team_away_name"
+                name="team_away_name"
+                className="border-tisco-gray rounded-md border bg-white px-2 py-1 placeholder:text-sm"
+                value={data.team_away_name || ""}
+                onChange={handleChange}
               />
+              <span className="text-tisco-gray text-xs">
+                Tippe den Namen des Gast-Teams ein...
+              </span>
             </label>
             <label
-              htmlFor="team-away-players"
+              htmlFor="team_away_players"
               className="flex w-full flex-col gap-1 py-5"
             >
-              <span className="font-medium">Rückennummer (optional):</span>
+              <span className="font-medium">Rückennummern (optional):</span>
               <input
                 type="text"
-                id="team-away-players"
-                name="team-away-players"
-                className="border-tisco-navy rounded-md border bg-white px-2 py-1 placeholder:text-sm"
-                placeholder="Tippe die Rückennummer kommagetrennt ein, z.B. 2,4,7,12 usw. ..."
-                value={data.team.away.players.join(", ") || null}
+                id="team_away_players"
+                name="team_away_players"
+                className="border-tisco-gray rounded-md border bg-white px-2 py-1 placeholder:text-sm"
+                value={data.team_away_players.join(", ") || ""}
+                onChange={handleChange}
               />
+              <span className="text-tisco-gray text-xs">
+                Tippe die Rückennummer kommagetrennt ein, z.B. 2,4,7,12 usw. ...
+              </span>
+            </label>
+          </fieldset>
+          <fieldset className="grow rounded-xl bg-white p-5">
+            <summary className="list-none pb-3 font-[Lato-bold] text-lg">
+              Spielregeln
+            </summary>
+            <label
+              htmlFor="match_period_number"
+              className="flex w-full flex-col gap-1 py-5"
+            >
+              <span className="font-medium">Abschnitte:</span>
+              <input
+                type="number"
+                id="match_period_number"
+                name="match_period_number"
+                className="border-tisco-gray rounded-md border bg-white px-2 py-1 placeholder:text-sm"
+                value={data.match_period_number}
+                onChange={handleChange}
+              />
+              <span className="text-tisco-gray text-xs">
+                Aus wievielen Abschnitten besteht ein komplettes Match? (z.B. 2
+                Halbzeiten, 3 Drittel usw. ...)
+              </span>
+            </label>
+            <label
+              htmlFor="match_period_duration"
+              className="flex w-full flex-col gap-1 py-5"
+            >
+              <span className="font-medium">Dauer eines Abschnitts:</span>
+              <input
+                type="text"
+                id="match_period_duration"
+                name="match_period_duration"
+                className="border-tisco-gray rounded-md border bg-white px-2 py-1 placeholder:text-sm"
+                placeholder="Tippe die Rückennummer kommagetrennt ein, z.B. 2,4,7,12 usw. ..."
+                value={data.match_period_duration}
+                onChange={handleChange}
+              />
+              <span className="text-tisco-gray text-xs">
+                Wieviele Minuten dauert 1 Spielabschnitt?
+              </span>
             </label>
           </fieldset>
         </form>
         <div className="flex w-full justify-between gap-5">
-          <button className="border-tisco-navy text-tisco-red hover:bg-tisco-red w-50 cursor-pointer rounded px-5 py-2 hover:text-white hover:shadow">
+          <button
+            onClick={handleReset}
+            className="border-tisco-navy text-tisco-red hover:bg-tisco-red w-50 cursor-pointer rounded px-5 py-2 hover:text-white hover:shadow"
+          >
             Löschen
           </button>
           <button

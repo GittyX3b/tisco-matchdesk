@@ -13,8 +13,8 @@ export const ScoreBoard = ({ data }) => {
   return (
     <article id="score-container" className="flex justify-around p-20">
       <ScoreCounter
-        name={data.team.home.name || "Heim"}
-        score={data.team.home.score}
+        name={data.team_home_name || "Heim"}
+        score={data.team_home_score}
       />
       <div
         id="center-container"
@@ -22,13 +22,13 @@ export const ScoreBoard = ({ data }) => {
       >
         <h2>Spielstand</h2>
         <div>
-          <span>{data.game.period.active}</span>
-          <span>.{data.game.period.names[data.game.period.number]}</span>
+          <span>{data.match_period_active}</span>
+          <span>.{data.match_period_names[data.match_period_number]}</span>
         </div>
       </div>
       <ScoreCounter
-        name={data.team.away.name || "Gast"}
-        score={data.team.away.score}
+        name={data.team_away_name || "Gast"}
+        score={data.team_away_score}
       />
     </article>
   );
