@@ -1,6 +1,6 @@
 export const ConfigModal = ({ isVisible, setVisibility, data, setData }) => {
   const handleChange = (e) => {
-    setData({ ...data, [e.target.name]: e.target.value });
+    setData({ ...data, [e.target.name]: e.target.value.trim() });
   };
 
   const handleReset = () => {
@@ -40,7 +40,7 @@ export const ConfigModal = ({ isVisible, setVisibility, data, setData }) => {
             </summary>
             <label
               htmlFor="team_home_name"
-              className="w-ful flex flex-col gap-1 py-5"
+              className="flex w-full flex-col gap-1 py-5"
             >
               <span className="font-medium">Name:</span>
               <input

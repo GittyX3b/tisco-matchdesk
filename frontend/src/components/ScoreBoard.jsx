@@ -1,6 +1,6 @@
 const ScoreCounter = ({ name, score }) => {
   return (
-    <div className="flex w-min flex-col items-center justify-center text-black">
+    <div className="flex w-min flex-col items-center justify-center">
       <span className="w-min text-center font-[Lato-Black] text-2xl font-bold uppercase">
         {name}
       </span>
