@@ -13,3 +13,11 @@ export const initialData = {
   match_period_duration: 15, // duration in minutes of 1 period
   match_period_active: 1, // counter for current match
 };
+
+/**
+ * initial set for matchtime
+ */
+
+export const initialMatchTime = {
+  isRunning: false,
+};

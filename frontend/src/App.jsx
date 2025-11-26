@@ -11,22 +11,23 @@ const App = () => {
   const [configVisible, setConfigVisibility] = useState(false);
   const [data, setData] = useState(initialData);
 
-  const [timeOn, setTime] = useState(false);
-
+  const [matchTimeOn, setMatchTime] = useState(false);
   useEffect(() => {
-    const timer = setInterval(() => {
-      if (timeOn) console.log("timer");
+    const matchtimer = setInterval(() => {
+      if (matchTimeOn) console.log("matchtime");
     }, 1000);
 
     return () => {
-      clearInterval(timer);
+      clearInterval(matchtimer);
     };
-  }, [timeOn]);
+  }, [matchTimeOn]);
 
   return (
     <div
       id="wrapper"
-      className="bg-tisco-gray flex min-h-screen w-full flex-col items-center"
+      className={`flex min-h-screen w-full flex-col items-center ${
+        matchTimeOn ? "bg-tisco-gray" : "bg-tisco-red"
+      }`}
     >
       <Header setConfigVisibility={setConfigVisibility} />
       <main
@@ -35,7 +36,7 @@ const App = () => {
       >
         <section id="main-left" className="flex w-[70%] flex-col gap-5">
           <ScoreBoard data={data} />
-          <TimerBoard timeOn={timeOn} setTime={setTime} />
+          <TimerBoard matchTimeOn={matchTimeOn} setMatchTime={setMatchTime} />
         </section>
         <section id="main-right" className="flex h-min grow">
           <PenaltyBoard />

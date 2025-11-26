@@ -41,3 +41,10 @@ h1 {
 h2 {
   @apply pb-5 font-[Lato-Bold] text-xl font-bold;
 }
+
+.button {
+  @apply active:outline-tisco-navy active:text-tisco-navy flex cursor-pointer items-center justify-center rounded shadow-md active:scale-99 active:bg-white active:shadow active:outline-2;
+}
+.button-matchtime {
+  @apply bg-tisco-navy px-20 py-3 text-2xl text-white;
+}

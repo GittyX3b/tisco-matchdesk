@@ -146,12 +146,12 @@ export const ConfigModal = ({ isVisible, setVisibility, data, setData }) => {
         <div className="flex w-full justify-between gap-5">
           <button
             onClick={handleReset}
-            className="border-tisco-navy text-tisco-red hover:bg-tisco-red w-50 cursor-pointer rounded px-5 py-2 hover:text-white hover:shadow"
+            className="button text-tisco-red hover:bg-tisco-red w-50 px-5 py-2 hover:text-white hover:shadow"
           >
             Löschen
           </button>
           <button
-            className="bg-tisco-green w-100 cursor-pointer rounded px-5 py-2 shadow"
+            className="button bg-tisco-green w-100 cursor-pointer rounded px-5 py-2 shadow"
             onClick={() => setVisibility(false)}
           >
             Schliessen
