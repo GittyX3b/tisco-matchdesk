@@ -5,47 +5,30 @@ import {
   ScoreBoard,
   TimerBoard,
 } from "@components";
-import { initialData } from "@data/config";
-import { useEffect, useState } from "react";
+import { useConfig, useTime, useTimeLine } from "@data/provider";
+import { useState } from "react";
 
 const App = () => {
   const [configVisible, setConfigVisibility] = useState(false);
-  const [data, setData] = useState(initialData);
 
-  const [matchTimeOn, setMatchTime] = useState(false);
-  useEffect(() => {
-    const matchtimer = setInterval(() => {
-      if (matchTimeOn) console.log("matchtime");
-    }, 1000);
+  // Testing Provider
+  const { config } = useConfig();
+  const { time } = useTime();
+  const { timeline } = useTimeLine();
 
-    return () => {
-      clearInterval(matchtimer);
-    };
-  }, [matchTimeOn]);
+  console.log(config.sanity);
+  console.log(time.sanity);
+  console.log(timeline.sanity);
 
   return (
     <div
       id="wrapper"
-      className={`flex min-h-screen w-full flex-col items-center ${
-        matchTimeOn ? "bg-tisco-gray" : "bg-tisco-red"
-      }`}
+      className={`bg-tisco-gray flex min-h-screen w-full flex-col items-center`}
     >
       <Header setConfigVisibility={setConfigVisibility} />
-      <main
-        id="main-layout"
-        className="flex w-full max-w-[1600px] grow justify-center gap-5 p-10 pt-50"
-      >
-        <section id="main-left" className="flex w-[70%] flex-col gap-5">
-          <ScoreBoard data={data} />
-          <TimerBoard matchTimeOn={matchTimeOn} setMatchTime={setMatchTime} />
-        </section>
-        <section id="main-right" className="flex h-min grow">
-          <PenaltyBoard />
-        </section>
-      </main>
+      <main className="pt-20"></main>
+
       <ConfigModal
-        data={data}
-        setData={setData}
         isVisible={configVisible}
         setVisibility={setConfigVisibility}
       />

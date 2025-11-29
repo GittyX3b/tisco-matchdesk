@@ -1,12 +1,6 @@
-import { initialData } from "@data/config";
+import { useConfig } from "@provider";
 
-export const ConfigModal = ({ isVisible, setVisibility, data, setData }) => {
-  const handleChange = (e) => {
-    setData({ ...data, [e.target.name]: e.target.value.trim() });
-  };
-
-  const handleReset = () => setData(initialData);
-
+export const ConfigModal = ({ isVisible, setVisibility }) => {
   return (
     <aside
       id="config-container"
@@ -18,6 +12,7 @@ export const ConfigModal = ({ isVisible, setVisibility, data, setData }) => {
           <img
             src="src/assets/icons/Tisco_logo_icon_transparent_xs.webp"
             alt="TiSco-Logo"
+            onClick={() => setDrei("neu auf click")}
           />
           <h1>TiSco - Zeitmanagement für Sportveranstaltungen</h1>
         </div>
@@ -37,8 +32,6 @@ export const ConfigModal = ({ isVisible, setVisibility, data, setData }) => {
                 id="team_home_name"
                 name="team_home_name"
                 className="border-tisco-gray rounded-md border bg-white px-2 py-1 placeholder:text-sm"
-                value={data.team_home_name || ""}
-                onChange={handleChange}
               />
               <span className="text-tisco-gray text-xs">
                 Tippe den Namen des Heim-Teams ein...
@@ -54,8 +47,6 @@ export const ConfigModal = ({ isVisible, setVisibility, data, setData }) => {
                 id="team_home_players"
                 name="team_home_players"
                 className="border-tisco-gray rounded-md border bg-white px-2 py-1 placeholder:text-sm"
-                value={data.team_home_players.join(", ") || ""}
-                onChange={handleChange}
               />
               <span className="text-tisco-gray text-xs">
                 Tippe die Rückennummer kommagetrennt ein, z.B. 2,4,7,12 usw. ...
@@ -76,8 +67,6 @@ export const ConfigModal = ({ isVisible, setVisibility, data, setData }) => {
                 id="team_away_name"
                 name="team_away_name"
                 className="border-tisco-gray rounded-md border bg-white px-2 py-1 placeholder:text-sm"
-                value={data.team_away_name || ""}
-                onChange={handleChange}
               />
               <span className="text-tisco-gray text-xs">
                 Tippe den Namen des Gast-Teams ein...
@@ -93,8 +82,6 @@ export const ConfigModal = ({ isVisible, setVisibility, data, setData }) => {
                 id="team_away_players"
                 name="team_away_players"
                 className="border-tisco-gray rounded-md border bg-white px-2 py-1 placeholder:text-sm"
-                value={data.team_away_players.join(", ") || ""}
-                onChange={handleChange}
               />
               <span className="text-tisco-gray text-xs">
                 Tippe die Rückennummer kommagetrennt ein, z.B. 2,4,7,12 usw. ...
@@ -115,8 +102,6 @@ export const ConfigModal = ({ isVisible, setVisibility, data, setData }) => {
                 id="match_period_number"
                 name="match_period_number"
                 className="border-tisco-gray rounded-md border bg-white px-2 py-1 placeholder:text-sm"
-                value={data.match_period_number}
-                onChange={handleChange}
               />
               <span className="text-tisco-gray text-xs">
                 Aus wievielen Abschnitten besteht ein komplettes Match? (z.B. 2
@@ -134,8 +119,6 @@ export const ConfigModal = ({ isVisible, setVisibility, data, setData }) => {
                 name="match_period_duration"
                 className="border-tisco-gray rounded-md border bg-white px-2 py-1 placeholder:text-sm"
                 placeholder="Tippe die Rückennummer kommagetrennt ein, z.B. 2,4,7,12 usw. ..."
-                value={data.match_period_duration}
-                onChange={handleChange}
               />
               <span className="text-tisco-gray text-xs">
                 Wieviele Minuten dauert 1 Spielabschnitt?
@@ -144,10 +127,7 @@ export const ConfigModal = ({ isVisible, setVisibility, data, setData }) => {
           </fieldset>
         </form>
         <div className="flex w-full justify-between gap-5">
-          <button
-            onClick={handleReset}
-            className="button text-tisco-red hover:bg-tisco-red w-50 px-5 py-2 hover:text-white hover:shadow"
-          >
+          <button className="button text-tisco-red hover:bg-tisco-red w-50 px-5 py-2 hover:text-white hover:shadow">
             Löschen
           </button>
           <button

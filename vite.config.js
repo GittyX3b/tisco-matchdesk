@@ -24,11 +24,11 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
-      "@data": path.resolve(__dirname, "./src/data"),
-      "@layouts": path.resolve(__dirname, "./src/layouts"),
-      "@pages": path.resolve(__dirname, "./src/pages"),
-      "@components": path.resolve(__dirname, "./src/components"),
       "@assets": path.resolve(__dirname, "./src/assets"),
+      "@data": path.resolve(__dirname, "./src/data"),
+      "@provider": path.resolve(__dirname, "./src/data/provider"),
+      "@components": path.resolve(__dirname, "./src/components"),
+      "@elements": path.resolve(__dirname, "./src/components/elements"),
     },
   },
   server: {
