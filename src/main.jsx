@@ -1,11 +1,17 @@
+import App from "@/App.jsx";
+import "@/main.css";
+import { ConfigProvider, TimeLineProvider, TimeProvider } from "@provider";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 
-import App from "./App.jsx";
-import "./main.css";
-
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <App />
+    <ConfigProvider>
+      <TimeProvider>
+        <TimeLineProvider>
+          <App />
+        </TimeLineProvider>
+      </TimeProvider>
+    </ConfigProvider>
   </StrictMode>,
 );

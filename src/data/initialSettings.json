@@ -1,0 +1,6 @@
+{
+  "match": {
+    "periods": 2,
+    "secPerPeriod": 900
+  }
+}
