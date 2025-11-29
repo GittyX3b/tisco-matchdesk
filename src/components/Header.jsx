@@ -1,3 +1,4 @@
+import tisco_logo from "@assets/icons/Tisco_logo_icon_transparent_xs.webp";
 import { Settings } from "lucide-react";
 
 export const Header = ({ setConfigVisibility }) => {
@@ -13,7 +14,7 @@ export const Header = ({ setConfigVisibility }) => {
         <div id="statusbar-left" className="flex items-center">
           <img
             id="logo"
-            src="./src/assets/icons/Tisco_logo_icon_transparent_xs.webp"
+            src={`${tisco_logo}`}
             alt="TiSco Logo"
             className="mr-4 aspect-auto px-5"
           />

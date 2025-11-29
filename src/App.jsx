@@ -1,11 +1,12 @@
+import {
+  ConfigModal,
+  Header,
+  PenaltyBoard,
+  ScoreBoard,
+  TimerBoard,
+} from "@components";
+import { initialData } from "@data/config";
 import { useEffect, useState } from "react";
-
-import { ConfigModal } from "./components/ConfigModal";
-import { Header } from "./components/Header";
-import { PenaltyBoard } from "./components/PenaltyBoard";
-import { ScoreBoard } from "./components/ScoreBoard";
-import { TimerBoard } from "./components/TimerBoard";
-import { initialData } from "./js/data";
 
 const App = () => {
   const [configVisible, setConfigVisibility] = useState(false);

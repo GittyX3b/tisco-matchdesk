@@ -1,4 +1,4 @@
-import { initialData } from "../js/data";
+import { initialData } from "@data/config";
 
 export const ConfigModal = ({ isVisible, setVisibility, data, setData }) => {
   const handleChange = (e) => {
