@@ -1,3 +1,3 @@
 export const TimerBoard = () => {
-  return <article>Timerboard</article>;
+  return <article className='tisco-tile'>Timerboard</article>;
 };

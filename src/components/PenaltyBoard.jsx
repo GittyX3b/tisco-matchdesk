@@ -1,3 +1,3 @@
 export const PenaltyBoard = () => {
-  return <article>PenaltyBoard</article>;
+  return <article className='tisco-tile'>PenaltyBoard</article>;
 };
