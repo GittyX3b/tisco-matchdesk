@@ -1,10 +1,10 @@
-import { createContext, useState } from "react";
+import { createContext, useState } from 'react';
 
 const TimeCtx = createContext(null);
 
 const TimeProvider = ({ children }) => {
   const [time, setTime] = useState({
-    sanity: "time data - ok",
+    sanity: 'time data - ok',
   });
 
   const setEins = (eins) => setTime((c) => ({ ...c, eins }));

@@ -1,24 +1,14 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
-@font-face {
-  font-family: Doto;
-  src: url(./assets/fonts/Doto-VariableFont_ROND\,wght.ttf);
-}
-
-@font-face {
-  font-family: Lato-Black;
-  src: url(./assets/fonts/Lato-Black.ttf);
-}
-@font-face {
-  font-family: Lato-Bold;
-  src: url(./assets/fonts/Lato-Bold.ttf);
-}
-@font-face {
-  font-family: Lato;
-  src: url(./assets/fonts/Lato-Regular.ttf);
-}
+@import '@assets/styles/fonts.css';
+@import '@assets/styles/text.css';
 
 @theme {
+  --font-doto: 'Doto', monospace;
+  --font-lato: 'Lato', Arial;
+  --font-lato-black: 'Lato-Black', Arial;
+  --font-lato-bold: 'Lato-Bold', Arial;
+
   --color-tisco-light: #f5f7fa;
   --color-tisco-gray: #a7b1bc;
   --color-tisco-navy: #0a3764;
@@ -27,24 +17,10 @@
   --color-tisco-red: #e74c3c;
 }
 
-body {
-  @apply text-tisco-navy bg-black font-[Lato];
+.tisco-maxwidth {
+  @apply max-w-[1600px];
 }
 
-article {
-  @apply bg-tisco-light rounded-xl p-5 shadow-md transition-all hover:shadow-lg;
-}
-
-h1 {
-  @apply py-10 font-[Lato-Black] text-4xl font-bold;
-}
-h2 {
-  @apply pb-5 font-[Lato-Bold] text-xl font-bold;
-}
-
-.button {
-  @apply active:outline-tisco-navy active:text-tisco-navy flex cursor-pointer items-center justify-center rounded shadow-md active:scale-99 active:bg-white active:shadow active:outline-2;
-}
-.button-matchtime {
-  @apply bg-tisco-navy px-20 py-3 text-2xl text-white;
+.tisco-tile {
+  @apply grow rounded-md bg-white p-10 shadow-lg;
 }

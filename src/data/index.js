@@ -1,3 +1,3 @@
-import initialSettings from "@data/initialSettings";
+import initialSettings from '@data/initialSettings';
 
 export { initialSettings };

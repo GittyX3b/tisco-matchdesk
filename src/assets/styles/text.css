@@ -1,0 +1,15 @@
+body {
+  @apply font-lato text-tisco-navy;
+}
+
+h1 {
+  @apply font-lato-black py-8 text-[2.2rem];
+}
+
+h2 {
+  @apply font-lato-bold py-6 text-[1.5rem];
+}
+
+h3 {
+  @apply font-lato-bold py-4 text-[1.2rem];
+}

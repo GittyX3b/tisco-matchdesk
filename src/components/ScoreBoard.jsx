@@ -1,3 +1,3 @@
 export const ScoreBoard = () => {
-  return <article>ScoreBoard</article>;
+  return <article className='tisco-tile'>ScoreBoard</article>;
 };
