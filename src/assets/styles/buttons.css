@@ -1,0 +1,7 @@
+.btn-green {
+  @apply btn bg-tisco-green font-bold text-white;
+}
+
+.btn-red {
+  @apply btn bg-tisco-red font-bold text-white;
+}
