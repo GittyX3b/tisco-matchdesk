@@ -15,3 +15,10 @@
   font-family: Lato;
   src: url(@assets/fonts/Lato-Regular.ttf);
 }
+
+@theme {
+  --font-doto: 'Doto', monospace;
+  --font-lato: 'Lato', Arial;
+  --font-lato-black: 'Lato-Black', Arial;
+  --font-lato-bold: 'Lato-Bold', Arial;
+}
