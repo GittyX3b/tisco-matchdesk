@@ -9,6 +9,7 @@ const TimeProvider = ({ children }) => {
   });
 
   const toggleTime = () => setTime((prev) => ({ ...prev, on: !prev.on }));
+  const stopTime = () => setTime((prev) => ({ ...prev, on: false }));
 
   // const setEins = (eins) => setTime((c) => ({ ...c, eins }));
 
@@ -18,7 +19,7 @@ const TimeProvider = ({ children }) => {
   //     zwei: { ...c.zwei, drei },
   //   }));
 
-  return <TimeCtx value={{ time, toggleTime }}>{children}</TimeCtx>;
+  return <TimeCtx value={{ time, stopTime, toggleTime }}>{children}</TimeCtx>;
 };
 
 export { TimeCtx, TimeProvider };
