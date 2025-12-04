@@ -11,8 +11,8 @@ const PenaltyBoard = () => {
   }, []);
 
   return (
-    <article className='tisco-tile'>
-      PenaltyBoard
+    <article className='tisco-tile grow'>
+      <span className='tile-heading'>Strafzeiten</span>
       <CountDownTimer initSec='20' isRunning={time.on} onTimesUp={handleTimesUp} />
     </article>
   );
