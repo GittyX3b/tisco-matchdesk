@@ -5,11 +5,8 @@
 @import '@assets/styles/buttons.css';
 @import '@assets/styles/fonts.css';
 @import '@assets/styles/text.css';
+@import '@assets/styles/tiles.css';
 
 .tisco-maxwidth {
   @apply max-w-[1600px];
-}
-
-.tisco-tile {
-  @apply grow rounded-md bg-white p-10 shadow-lg;
 }

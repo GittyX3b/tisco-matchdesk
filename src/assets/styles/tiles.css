@@ -1,0 +1,7 @@
+.tisco-tile {
+  @apply grow rounded-md bg-white p-5 shadow-lg;
+}
+
+.tile-heading {
+  @apply font-lato-bold text-lg;
+}
