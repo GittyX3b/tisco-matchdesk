@@ -1,19 +1,36 @@
 import { useEffect, useState } from 'react';
 
-const CountDownTimer = ({ initSec, isRunning }) => {
+const CountDownTimer = ({ initSec, isRunning, onTimesUp, className }) => {
   const [timerSec, setTimerSec] = useState(Number(initSec));
-  const [timesUp, setTimesUp] = useState(false);
+
+  const timesUp = timerSec === 0;
 
   useEffect(() => {
-    if (!isRunning || timesUp) return;
+    if (!isRunning) return;
+    if (timesUp) onTimesUp();
 
     const interval = setInterval(() => {
       setTimerSec((prev) => (prev === 0 ? 0 : prev - 1));
     }, 1000);
-    return () => clearInterval(interval);
-  });
 
-  return <div>CountDownTimer: {timerSec}</div>;
+    return () => clearInterval(interval);
+  }, [timesUp, isRunning, onTimesUp]);
+
+  return (
+    <div className={className}>
+      <span>
+        {Math.floor(timerSec / 60).toString().length < 2
+          ? '0' + Math.floor(timerSec / 60).toString()
+          : Math.floor(timerSec / 60).toString()}
+      </span>
+      <span>:</span>
+      <span>
+        {(timerSec % 60).toString().length < 2
+          ? '0' + (timerSec % 60).toString()
+          : (timerSec % 60).toString()}
+      </span>
+    </div>
+  );
 };
 
 export { CountDownTimer };
