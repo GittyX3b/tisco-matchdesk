@@ -2,7 +2,7 @@ import { Minus, Plus } from 'lucide-react';
 import { useState } from 'react';
 
 const ScoreCounter = ({ teamName, className }) => {
-  const team = teamName ? teamName : 'Osternienburger HC';
+  const team = teamName ? teamName : 'TEAM';
   const [score, setScore] = useState(0);
 
   const scoreUp = () => setScore((prev) => (prev += 1));

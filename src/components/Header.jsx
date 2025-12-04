@@ -8,7 +8,7 @@ export const Header = () => {
   const { toggleConfigModal } = useConfig();
 
   return (
-    <header className='bg-tisco-gray border-tisco-navy fixed w-full border-b-3 p-5 shadow-lg'>
+    <header className='bg-tisco-gray border-tisco-navy fixed h-min w-full border-b-3 p-2 shadow-lg'>
       <div
         id='centering-container'
         className='tisco-maxwidth m-auto flex items-center justify-between xl:justify-around'
@@ -23,11 +23,13 @@ export const Header = () => {
           state display...
         </div>
         <div id='statusbar-right'>
-          <button className='cursor-pointer rounded-[50%] bg-white p-2 text-zinc-400 hover:text-zinc-400 active:text-zinc-500'>
+          <button
+            className='cursor-pointer rounded-[50%] bg-white p-2 text-zinc-400 hover:text-zinc-400 active:text-zinc-500'
+            onClick={() => toggleConfigModal()}
+          >
             <Settings
               size={36}
               className='transition-transform duration-300 ease-in-out hover:animate-spin'
-              onClick={() => toggleConfigModal()}
             />
           </button>
         </div>

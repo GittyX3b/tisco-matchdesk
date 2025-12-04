@@ -13,7 +13,7 @@ const TimerBoard = () => {
   }, [stopTime]);
 
   return (
-    <article className={`tisco-tile grid grid-cols-[1fr_1fr_4fr_1fr_1fr]`}>
+    <article className={`tisco-tile grid grow grid-cols-[1fr_1fr_4fr_1fr_1fr]`}>
       <span className='tile-heading col-start-3 m-auto'>Spielzeit</span>
       <CountDownTimer
         initSec='4'
