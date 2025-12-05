@@ -1,8 +1,8 @@
-# TISCO - the GameDesk
+# TISCO - MatchDesk
 
-Monitoring playing time, penalty times and game progress. Everything relevant to match day for referees, referees or managers in one app.
+Monitoring matchtime, penalty times and game progress at teamsport encounters.
 
-TISCO stands for Time & Score - a modern app for professional time and score control at sporting events. The brand appears precise, sporty, clear and reliable.
+TISCO stands for Time & Score.
 
 ## Links
 
