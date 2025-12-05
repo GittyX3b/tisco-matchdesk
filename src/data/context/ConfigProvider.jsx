@@ -6,7 +6,17 @@ const ConfigProvider = ({ children }) => {
   const [config, setConfig] = useState({
     sanity: 'config data - ok',
     settingsVisible: false,
+    periodsPerMatch: 4,
+    periodNow: 1,
+    periodNames: ['', 'Spielzeit', 'Halbzeit', 'Drittel', 'Viertel'],
+    minutesPerPeriod: 15,
+    teamHomeName: '',
+    teamHomeNumbers: [],
+    teamAwayName: '',
+    teamAwayNumbers: [],
   });
+
+  const [gamePending, setGamePending] = useState(false);
 
   const toggleConfigModal = () => setConfig((p) => ({ ...p, settingsVisible: !p.settingsVisible }));
 
@@ -16,7 +26,11 @@ const ConfigProvider = ({ children }) => {
   //     zwei: { ...c.zwei, drei },
   //   }));
 
-  return <ConfigCtx value={{ config, toggleConfigModal }}>{children}</ConfigCtx>;
+  return (
+    <ConfigCtx value={{ config, setConfig, toggleConfigModal, gamePending, setGamePending }}>
+      {children}
+    </ConfigCtx>
+  );
 };
 
 export { ConfigCtx, ConfigProvider };

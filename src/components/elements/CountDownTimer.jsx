@@ -5,6 +5,7 @@ const CountDownTimer = ({ initSec, isRunning, onTimesUp, className }) => {
 
   const timesUp = timerSec === 0;
 
+  // counting down the seconds until 0 or !isRunning
   useEffect(() => {
     if (!isRunning) return;
     if (timesUp) onTimesUp();
@@ -15,6 +16,11 @@ const CountDownTimer = ({ initSec, isRunning, onTimesUp, className }) => {
 
     return () => clearInterval(interval);
   }, [timesUp, isRunning, onTimesUp]);
+
+  // reinitialize if initSec changes
+  useEffect(() => {
+    setTimerSec(Number(initSec));
+  }, [initSec]);
 
   return (
     <div className={className}>
