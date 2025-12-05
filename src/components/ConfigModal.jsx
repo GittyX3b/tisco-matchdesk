@@ -3,13 +3,31 @@ import { useConfig } from '@context';
 export const ConfigModal = () => {
   const { config, toggleConfigModal, setConfig } = useConfig();
 
-  const onChangeConfigHandler = (e) => {
-    console.log(e.target.value);
-    setConfig((prev) => ({ ...prev, [e.target.name]: Number(e.target.value) }));
-  };
-
-  const onChangeMatchHandler = (e) => {
-    console.log(e.target.value);
+  const onChangeHandler = (e) => {
+    if (e.target.name.endsWith('Name')) {
+      setConfig((prev) => ({
+        ...prev,
+        [e.target.name]: e.target.value.toString(),
+      }));
+    } else if (e.target.name.endsWith('Numbers')) {
+      setConfig((prev) => ({
+        ...prev,
+        [e.target.name]: [
+          ...new Set(
+            e.target.value
+              .trim()
+              .split(/[ ,.;<>]+/) // split by space, comma, dot, semicolon, <, or multiple together
+              .map(Number) // convert each string to number
+              .filter((n) => !isNaN(n)), // remove any NaN
+          ),
+        ],
+      }));
+    } else {
+      setConfig((prev) => ({
+        ...prev,
+        [e.target.name]: Number(e.target.value),
+      }));
+    }
   };
 
   return (
@@ -40,7 +58,7 @@ export const ConfigModal = () => {
                 name='teamHomeName'
                 placeholder='z.B. SV Leverkusen'
                 className='input mt-1 w-full text-xl placeholder:text-sm'
-                onChange={onChangeMatchHandler}
+                onChange={onChangeHandler}
               />
             </div>
 
@@ -53,7 +71,7 @@ export const ConfigModal = () => {
                 name='teamHomeNumbers'
                 placeholder='z.B. 1,2,3,5,8,11,14,56'
                 className='input mt-1 w-full text-xl placeholder:text-sm'
-                onChange={onChangeMatchHandler}
+                onChange={onChangeHandler}
               />
             </div>
           </fieldset>
@@ -72,7 +90,7 @@ export const ConfigModal = () => {
                 step={1}
                 value={config.periodsPerMatch}
                 className='input mt-1 w-full text-center text-xl placeholder:text-sm'
-                onChange={onChangeConfigHandler}
+                onChange={onChangeHandler}
               />
             </div>
             <div className='grid w-full grid-cols-[1fr_2fr] items-center justify-between gap-4'>
@@ -83,11 +101,10 @@ export const ConfigModal = () => {
                 type='number'
                 placeholder='z.B. 45 bei Fussball'
                 min={1}
-                max={90}
                 step={1}
                 value={config.minutesPerPeriod}
                 className='input mt-1 w-full text-center text-xl placeholder:text-sm'
-                onChange={onChangeConfigHandler}
+                onChange={onChangeHandler}
               />
             </div>
           </fieldset>
@@ -103,7 +120,7 @@ export const ConfigModal = () => {
                 name='teamAwayName'
                 placeholder='z.B. TSG Hamburg'
                 className='input mt-1 w-full text-xl placeholder:text-sm'
-                onChange={onChangeMatchHandler}
+                onChange={onChangeHandler}
               />
             </div>
             {/* =============== Spielernummern =============== */}
@@ -115,7 +132,7 @@ export const ConfigModal = () => {
                 name='teamAwayNumbers'
                 placeholder='z.B. 1,2,3,5,8,11,14,56'
                 className='input mt-1 w-full text-xl placeholder:text-sm'
-                onChange={onChangeMatchHandler}
+                onChange={onChangeHandler}
               />
             </div>
           </fieldset>
