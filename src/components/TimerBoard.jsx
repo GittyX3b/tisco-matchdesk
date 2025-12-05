@@ -1,10 +1,12 @@
 import { Pause, Play } from 'lucide-react';
 import { useCallback } from 'react';
 
+import { useConfig } from '@context';
 import { useTime } from '@context';
 import { CountDownTimer } from '@elements';
 
 const TimerBoard = () => {
+  const { config } = useConfig();
   const { time, stopTime, toggleTime } = useTime();
 
   const handleTimesUp = useCallback(() => {
@@ -16,7 +18,7 @@ const TimerBoard = () => {
     <article className={`tisco-tile grid grow grid-cols-[1fr_1fr_4fr_1fr_1fr]`}>
       <span className='tile-heading col-start-3 m-auto'>Spielzeit</span>
       <CountDownTimer
-        initSec='4'
+        initSec={config.minutesPerPeriod * 60} //TODO: time changes not on config change
         isRunning={time.on}
         onTimesUp={handleTimesUp}
         className={`font-lato-black col-start-3 m-auto flex h-min w-full justify-evenly text-[10rem] leading-tight ${!time.on ? 'text-tisco-red' : ''}`}
