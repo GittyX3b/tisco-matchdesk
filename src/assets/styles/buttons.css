@@ -6,6 +6,14 @@
   @apply bg-tisco-red text-white;
 }
 
+.btn-yellow {
+  @apply bg-tisco-yellow text-tisco-navy;
+}
+
 .btn-blue {
   @apply bg-tisco-navy text-white;
+}
+
+.btn-gray {
+  @apply bg-tisco-light text-tisco-navy;
 }
