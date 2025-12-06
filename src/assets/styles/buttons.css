@@ -5,3 +5,7 @@
 .btn-red {
   @apply bg-tisco-red text-white;
 }
+
+.btn-blue {
+  @apply bg-tisco-navy text-white;
+}

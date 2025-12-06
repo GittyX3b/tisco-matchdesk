@@ -9,7 +9,7 @@ const ConfigProvider = ({ children }) => {
     periodsPerMatch: 4,
     periodNow: 1,
     periodNames: ['', 'Spielzeit', 'Halbzeit', 'Drittel', 'Viertel'],
-    minutesPerPeriod: 15,
+    minutesPerPeriod: 0.05,
     teamHomeName: '',
     teamHomeNumbers: [],
     teamAwayName: '',
