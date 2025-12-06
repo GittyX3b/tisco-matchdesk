@@ -1,26 +1,24 @@
 import { useEffect, useState } from 'react';
 
-const CountDownTimer = ({ initSec, isRunning, onTimesUp, className }) => {
+const CountDownTimer = ({ initSec, isRunning, onTimesUp, resetSign, className }) => {
   const [timerSec, setTimerSec] = useState(Number(initSec));
-
-  const timesUp = timerSec === 0;
 
   // counting down the seconds until 0 or !isRunning
   useEffect(() => {
     if (!isRunning) return;
-    if (timesUp) onTimesUp();
+    if (timerSec === 0 && isRunning) onTimesUp();
 
     const interval = setInterval(() => {
       setTimerSec((prev) => (prev === 0 ? 0 : prev - 1));
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [timesUp, isRunning, onTimesUp]);
+  }, [timerSec, isRunning, onTimesUp]);
 
   // reinitialize if initSec changes
   useEffect(() => {
     setTimerSec(Number(initSec));
-  }, [initSec]);
+  }, [initSec, resetSign]);
 
   return (
     <div className={className}>
