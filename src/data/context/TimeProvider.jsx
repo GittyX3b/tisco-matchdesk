@@ -14,14 +14,6 @@ const TimeProvider = ({ children }) => {
   const checkIfOver = (periodNow, periodsPerMatch) =>
     periodNow === periodsPerMatch && setTime((prev) => ({ ...prev, over: true }));
 
-  // const setEins = (eins) => setTime((c) => ({ ...c, eins }));
-
-  // const setDrei = (drei) =>
-  //   setTime((c) => ({
-  //     ...c,
-  //     zwei: { ...c.zwei, drei },
-  //   }));
-
   return <TimeCtx value={{ time, stopTime, toggleTime, checkIfOver }}>{children}</TimeCtx>;
 };
 

@@ -1,11 +1,11 @@
 import { Plus } from 'lucide-react';
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 
-import { useConfig, useTime } from '@context';
-import { CountDownTimer } from '@elements';
+import { Penalty } from '@elements/Penalty';
+
+import { useConfig } from '@context';
 
 const PenaltyBoard = () => {
-  const { time, _toggleTime } = useTime();
   const { config } = useConfig();
 
   const [btnActive, setBtnActive] = useState({
@@ -14,18 +14,61 @@ const PenaltyBoard = () => {
     green: false,
     yellow: false,
     red: false,
-    send: false,
   });
 
-  const [card, setCard] = useState({
+  const [PenaltyCard, setPenaltyCard] = useState({
     team: '',
-    playerNumber: 0,
-    color: '',
-    penaltyInSeconds: 0,
+    playerNumber: '',
+    color: 'green' | 'yellow' | 'red',
+    penaltyMinutes: '',
   });
+  const [penalties, setPenalties] = useState([]);
 
-  const handleTeamClick = (choice) => {
-    //TODO: color buttons on click, create card object, add penalttytime
+  const handleTeamClick = (teamname, buttonname) => {
+    buttonname === 'home'
+      ? setBtnActive((p) => ({ ...p, home: true, away: false }))
+      : setBtnActive((p) => ({ ...p, home: false, away: true }));
+    setPenaltyCard((p) => ({ ...p, team: teamname }));
+  };
+
+  const handleCardClick = (cardcolor) => {
+    switch (cardcolor) {
+      case 'green':
+        setBtnActive((p) => ({ ...p, green: true, yellow: false, red: false }));
+        setPenaltyCard((p) => ({ ...p, color: cardcolor, penaltyMinutes: 1 }));
+        break;
+      case 'yellow':
+        setBtnActive((p) => ({ ...p, green: false, yellow: true, red: false }));
+        setPenaltyCard((p) => ({ ...p, color: cardcolor, penaltyMinutes: 2 }));
+        break;
+      default:
+        setBtnActive((p) => ({ ...p, green: false, yellow: false, red: true }));
+        setPenaltyCard((p) => ({
+          ...p,
+          color: cardcolor,
+          penaltyMinutes: 'SPIELENDE',
+        }));
+        break;
+    }
+  };
+
+  const createPenalty = (penaltyObj) => {
+    setPenalties((prev) =>
+      [...prev, { ...penaltyObj, id: Date.now() }].sort((a, b) => {
+        if (a.penaltyMinutes === 'SPIELENDE') return 1;
+        if (b.penaltyMinutes === 'SPIELENDE') return -1;
+        return a.penaltyMinutes - b.penaltyMinutes;
+      }),
+    );
+    setBtnActive((p) => ({
+      ...p,
+      home: false,
+      away: false,
+      green: false,
+      yellow: false,
+      red: false,
+    }));
+    setPenaltyCard((p) => ({ ...p, team: '', playerNumber: '', color: '', penaltyMinutes: '' }));
   };
 
   return (
@@ -33,27 +76,39 @@ const PenaltyBoard = () => {
       <span className='tile-heading'>Strafzeiten</span>
       <form className='mb-5 grid grid-cols-6 gap-3 pt-5' method='dialog'>
         <button
-          className={`btn font-lato-bold btn- col-span-3 col-start-1 text-lg ${btnActive.home && 'btn-blue'}`}
-          onClick={handleTeamClick(config.teamHomeName || 'HEIM')}
+          className={`btn font-lato-bold col-span-3 col-start-1 text-lg ${btnActive.home && 'btn-white outline-tisco-navy outline-2'}`}
+          onClick={() => handleTeamClick(config.teamHomeName || 'HEIM', 'home')}
           type='button'
         >
           {config.teamHomeName || 'HEIM'}
         </button>
         <button
-          className='btn font-lato-bold col-span-3 col-start-4 text-lg'
-          onClick={handleTeamClick(config.teamAwayName || 'AUSWÄRTS')}
+          className={`btn font-lato-bold col-span-3 col-start-4 text-lg ${btnActive.away && 'btn-white outline-tisco-navy outline-2'}`}
+          onClick={() => handleTeamClick(config.teamAwayName || 'AUSWÄRTS', 'away')}
           team='away'
           type='button'
         >
           {config.teamAwayName || 'AUSWÄRTS'}
         </button>
-        <button type='button' className='btn col-span-2 col-start-1 text-lg'>
+        <button
+          type='button'
+          className={`btn col-span-2 col-start-1 text-lg ${btnActive.green && 'btn-green'}`}
+          onClick={() => handleCardClick('green')}
+        >
           GRÜN
         </button>
-        <button type='button' className='btn col-span-2 col-start-3 text-lg'>
+        <button
+          type='button'
+          className={`btn col-span-2 col-start-3 text-lg ${btnActive.yellow && 'btn-yellow'}`}
+          onClick={() => handleCardClick('yellow')}
+        >
           GELB
         </button>
-        <button type='button' className='btn col-span-2 col-start-5 text-lg'>
+        <button
+          type='button'
+          className={`btn col-span-2 col-start-5 text-lg ${btnActive.red && 'btn-red'}`}
+          onClick={() => handleCardClick('red')}
+        >
           ROT
         </button>
 
@@ -63,9 +118,13 @@ const PenaltyBoard = () => {
             <input
               id='penaltyPlayerNumber'
               name='penaltyPlayerNumber'
-              type='number'
+              type={btnActive.red ? 'text' : 'number'}
               min={0}
               step={1}
+              value={PenaltyCard.penaltyMinutes}
+              onChange={(e) =>
+                setPenaltyCard((p) => ({ ...p, penaltyMinutes: parseInt(e.target.value) || 0 }))
+              }
               placeholder='in Minuten, z.B. 2'
               className='border-tisco-navy h-15 w-52 rounded border text-center text-4xl placeholder:text-center placeholder:text-xl'
             ></input>
@@ -79,15 +138,30 @@ const PenaltyBoard = () => {
               type='number'
               min={0}
               step={1}
+              value={PenaltyCard.playerNumber}
+              onChange={(e) =>
+                setPenaltyCard((p) => ({ ...p, playerNumber: parseInt(e.target.value) || 0 }))
+              }
               placeholder='z.B. 8'
               className='border-tisco-navy h-15 w-52 rounded border text-center text-4xl placeholder:text-center placeholder:text-xl'
             ></input>
           </div>
         </div>
-        <button type='button' className='btn font-lato-black col-span-6 col-start-1 text-lg'>
-          <Plus />
+        <button
+          type='button'
+          className={`btn font-lato btn-blue col-span-6 col-start-1 text-lg ${!((btnActive.home || btnActive.away) && (btnActive.green || btnActive.yellow || btnActive.red)) && 'hidden'}`}
+          onClick={() => createPenalty(PenaltyCard)}
+        >
+          <Plus /> hinzufügen
         </button>
       </form>
+      <ul id='penalties'>
+        {penalties.map((penalty) => (
+          <li key={penalty.id}>
+            <Penalty card={penalty} />
+          </li>
+        ))}
+      </ul>
     </article>
   );
 };

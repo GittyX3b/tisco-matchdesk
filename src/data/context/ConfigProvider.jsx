@@ -20,12 +20,6 @@ const ConfigProvider = ({ children }) => {
 
   const toggleConfigModal = () => setConfig((p) => ({ ...p, settingsVisible: !p.settingsVisible }));
 
-  // const setDrei = (drei) =>
-  //   setConfig((c) => ({
-  //     ...c,
-  //     zwei: { ...c.zwei, drei },
-  //   }));
-
   return (
     <ConfigCtx value={{ config, setConfig, toggleConfigModal, gamePending, setGamePending }}>
       {children}

@@ -6,7 +6,7 @@ const CountDownTimer = ({ initSec, isRunning, onTimesUp, resetSign, className })
   // counting down the seconds until 0 or !isRunning
   useEffect(() => {
     if (!isRunning) return;
-    if (timerSec === 0 && isRunning) onTimesUp();
+    if (timerSec === 0 && isRunning) onTimesUp && onTimesUp();
 
     const interval = setInterval(() => {
       setTimerSec((prev) => (prev === 0 ? 0 : prev - 1));
