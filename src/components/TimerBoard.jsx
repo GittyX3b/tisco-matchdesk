@@ -17,11 +17,9 @@ const TimerBoard = () => {
     stopTime();
     setGamePending(() => (ppm !== pn ? true : false));
     checkIfOver(ppm, pn);
-    console.log('MatchTime is up');
   }, [stopTime, setGamePending, ppm, pn, checkIfOver]);
 
   const startNextPeriod = () => {
-    console.log('nächsten Soielabschnitt starten', config.periodNow < config.periodsPerMatch);
     if (config.periodNow < config.periodsPerMatch) {
       setResetSignal((c) => c + 1); // trigger timer reset
       setGamePending(false);

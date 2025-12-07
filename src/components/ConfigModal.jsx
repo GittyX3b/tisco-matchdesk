@@ -1,5 +1,7 @@
 import { useConfig } from '@context';
 
+import tisco_logo from '@assets/icons/Tisco_logo_icon_transparent_xs.webp';
+
 export const ConfigModal = () => {
   const { config, toggleConfigModal, setConfig } = useConfig();
 
@@ -37,11 +39,7 @@ export const ConfigModal = () => {
     >
       <div className='tisco-maxwidth flex w-full flex-col gap-4'>
         <div className='tisco-tile flex w-full items-center justify-between'>
-          <img
-            src='src/assets/icons/Tisco_logo_icon_transparent_xs.webp'
-            alt='TiSco-Logo'
-            onClick={() => console.log('neu auf click')}
-          />
+          <img src={tisco_logo} alt='TiSco-Logo' />
           <h1>TiSco - Zeitmanagement für Sportveranstaltungen</h1>
         </div>
 
