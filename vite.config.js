@@ -9,7 +9,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 export default defineConfig({
-  //base: "/", // set github reponame for deploy
+  base: '/tisco-matchdesk/', // set github reponame for deploy
   build: {
     rollupOptions: {
       input: {
