@@ -32,6 +32,17 @@ export const ConfigModal = () => {
     }
   };
 
+  const handleReset = () => {
+    setConfig((prev) => ({
+      ...prev,
+      teamHomeName: '',
+      teamHomeNumbers: [],
+      teamAwayName: '',
+      teamAwayNumbers: [],
+    }));
+    document.getElementById('config-form').reset();
+  };
+
   return (
     <aside
       className='absolute z-50 flex min-h-screen w-full flex-col items-center gap-4 overflow-auto bg-linear-to-b from-[rgba(167,177,188,0.8)] to-[rgba(0,0,0,0.7)] p-2 md:p-10'
@@ -49,7 +60,7 @@ export const ConfigModal = () => {
           <h2 className='px-5 text-center lg:hidden'>Zeitmanagement für Sportveranstaltungen</h2>
         </div>
 
-        <form className='grid w-full grid-cols-1 gap-4 lg:grid-cols-3'>
+        <form id='config-form' className='grid w-full grid-cols-1 gap-4 lg:grid-cols-3'>
           {/* ============= SETTINGS ========================= */}
           <fieldset className='tisco-tile p-b-10 flex flex-col gap-5 lg:order-2'>
             <span className='tile-heading'>EINSTELLUNGEN</span>
@@ -144,7 +155,11 @@ export const ConfigModal = () => {
       </div>
 
       <div className='tisco-tile tisco-maxwidth flex w-full justify-between gap-4'>
-        <button className='button text-tisco-red hover:bg-tisco-red w-min px-5 py-2 hover:text-white hover:shadow'>
+        <button
+          className='button text-tisco-red hover:bg-tisco-red w-min cursor-pointer rounded px-5 py-2 hover:text-white hover:shadow'
+          onClick={() => handleReset()}
+          type='Reset'
+        >
           Löschen
         </button>
         <button className='btn btn-green md:w-1/3' onClick={() => toggleConfigModal()}>
