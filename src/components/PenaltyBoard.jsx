@@ -71,6 +71,11 @@ const PenaltyBoard = () => {
     setPenaltyCard((p) => ({ ...p, team: '', playerNumber: '', color: '', penaltyMinutes: '' }));
   };
 
+  const removePenalty = (penaltyId) => {
+    console.log(penaltyId);
+    setPenalties((prev) => prev.filter((penalty) => penalty.id !== penaltyId));
+  };
+
   return (
     <article className='tisco-tile tex-tisco-navy grow'>
       <span className='tile-heading flex justify-center'>Strafzeiten</span>
@@ -114,10 +119,10 @@ const PenaltyBoard = () => {
 
         <div className='wrap col-span-6 flex justify-between gap-3 md:flex-col lg:flex-row'>
           <div className='input-group bg-tisco-light grid grow rounded p-4'>
-            <label htmlFor='penaltyPlayerNumber'>Strafzeit:</label>
+            <label htmlFor='penaltyMinutes'>Strafzeit:</label>
             <input
-              id='penaltyPlayerNumber'
-              name='penaltyPlayerNumber'
+              id='penaltyMinutes'
+              name='penaltyMinutes'
               type={btnActive.red ? 'text' : 'number'}
               min={0}
               step={1}
@@ -158,7 +163,7 @@ const PenaltyBoard = () => {
       <ul id='penalties'>
         {penalties.map((penalty) => (
           <li key={penalty.id}>
-            <Penalty card={penalty} />
+            <Penalty card={penalty} removePenalty={removePenalty} />
           </li>
         ))}
       </ul>

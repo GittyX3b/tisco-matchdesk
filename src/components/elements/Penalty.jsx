@@ -3,11 +3,12 @@ import { X } from 'lucide-react';
 import { useTime } from '@context';
 import { CountDownTimer } from '@elements';
 
-const Penalty = ({ card }) => {
+const Penalty = ({ card, removePenalty }) => {
   const { time } = useTime();
 
-  const deletePenalty = (x) => {
-    document.getElementById(x).remove();
+  const deletePenalty = (penaltyId) => {
+    document.getElementById(penaltyId).remove();
+    removePenalty(penaltyId);
   };
 
   return (
