@@ -3,17 +3,18 @@ import { X } from 'lucide-react';
 import { useTime } from '@context';
 import { CountDownTimer } from '@elements';
 
-const Penalty = ({ card }) => {
+const Penalty = ({ card, removePenalty }) => {
   const { time } = useTime();
 
-  const deletePenalty = (e) => {
-    e.target.remove();
+  const deletePenalty = (penaltyId) => {
+    document.getElementById(penaltyId).remove();
+    removePenalty(penaltyId);
   };
 
   return (
     <div
       id={card.id}
-      className={`btn-${card.color} my-1 flex w-full items-center justify-between rounded p-2 shadow-md`}
+      className={`btn-${card.color} my-1 flex w-full items-center justify-between rounded p-2 shadow-md md:flex-col lg:flex-row`}
     >
       {card.penaltyMinutes !== 'SPIELENDE' ? (
         <CountDownTimer
@@ -26,12 +27,14 @@ const Penalty = ({ card }) => {
       )}
 
       <div>
-        <span className='font-lato-bold pr-2 text-xl'>{card.playerNumber}</span>
+        {card.playerNumber && (
+          <span className='font-lato-bold pr-2 text-xl'>{card.playerNumber}</span>
+        )}
         <span className='text-md'>{card.team}</span>
       </div>
       <button
         className='bg-tisco-light text-tisco-navy cursor-pointer rounded-4xl p-1'
-        conClick={() => deletePenalty(card.id)}
+        onClick={() => deletePenalty(card.id)}
       >
         <X />
       </button>
