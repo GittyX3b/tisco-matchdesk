@@ -73,17 +73,17 @@ const PenaltyBoard = () => {
 
   return (
     <article className='tisco-tile tex-tisco-navy grow'>
-      <span className='tile-heading'>Strafzeiten</span>
+      <span className='tile-heading flex justify-center'>Strafzeiten</span>
       <form className='mb-5 grid grid-cols-6 gap-3 pt-5' method='dialog'>
         <button
-          className={`btn font-lato-bold col-span-3 col-start-1 text-lg ${btnActive.home && 'btn-white outline-tisco-navy outline-2'}`}
+          className={`btn font-lato-bold text-md col-span-3 col-start-1 h-full p-4 lg:text-lg ${btnActive.home && 'btn-white outline-tisco-navy outline-2'}`}
           onClick={() => handleTeamClick(config.teamHomeName || 'HEIM', 'home')}
           type='button'
         >
           {config.teamHomeName || 'HEIM'}
         </button>
         <button
-          className={`btn font-lato-bold col-span-3 col-start-4 text-lg ${btnActive.away && 'btn-white outline-tisco-navy outline-2'}`}
+          className={`btn font-lato-bold text-md col-span-3 col-start-4 h-full p-4 lg:text-lg ${btnActive.away && 'btn-white outline-tisco-navy outline-2'}`}
           onClick={() => handleTeamClick(config.teamAwayName || 'AUSWÄRTS', 'away')}
           team='away'
           type='button'
@@ -92,28 +92,28 @@ const PenaltyBoard = () => {
         </button>
         <button
           type='button'
-          className={`btn col-span-2 col-start-1 text-lg ${btnActive.green && 'btn-green'}`}
+          className={`btn text-md col-span-2 col-start-1 lg:text-lg ${btnActive.green && 'btn-green'}`}
           onClick={() => handleCardClick('green')}
         >
           GRÜN
         </button>
         <button
           type='button'
-          className={`btn col-span-2 col-start-3 text-lg ${btnActive.yellow && 'btn-yellow'}`}
+          className={`btn text-md col-span-2 col-start-3 lg:text-lg ${btnActive.yellow && 'btn-yellow'}`}
           onClick={() => handleCardClick('yellow')}
         >
           GELB
         </button>
         <button
           type='button'
-          className={`btn col-span-2 col-start-5 text-lg ${btnActive.red && 'btn-red'}`}
+          className={`btn text-md col-span-2 col-start-5 lg:text-lg ${btnActive.red && 'btn-red'}`}
           onClick={() => handleCardClick('red')}
         >
           ROT
         </button>
 
-        <div className='col-span-6 flex justify-between gap-3'>
-          <div className='input-group bg-tisco-light grid rounded p-4'>
+        <div className='wrap col-span-6 flex justify-between gap-3 md:flex-col lg:flex-row'>
+          <div className='input-group bg-tisco-light grid grow rounded p-4'>
             <label htmlFor='penaltyPlayerNumber'>Strafzeit:</label>
             <input
               id='penaltyPlayerNumber'
@@ -126,11 +126,11 @@ const PenaltyBoard = () => {
                 setPenaltyCard((p) => ({ ...p, penaltyMinutes: parseInt(e.target.value) || 0 }))
               }
               placeholder='in Minuten, z.B. 2'
-              className='border-tisco-navy h-15 w-52 rounded border text-center text-4xl placeholder:text-center placeholder:text-xl'
+              className='border-tisco-navy w-full rounded border text-center placeholder:text-center'
             ></input>
           </div>
 
-          <div className='input-group bg-tisco-light grid rounded p-4'>
+          <div className='input-group bg-tisco-light grid grow rounded p-4'>
             <label htmlFor='penaltyPlayerNumber'>Rückennummer:</label>
             <input
               id='penaltyPlayerNumber'
@@ -143,7 +143,7 @@ const PenaltyBoard = () => {
                 setPenaltyCard((p) => ({ ...p, playerNumber: parseInt(e.target.value) || 0 }))
               }
               placeholder='z.B. 8'
-              className='border-tisco-navy h-15 w-52 rounded border text-center text-4xl placeholder:text-center placeholder:text-xl'
+              className='border-tisco-navy w-full rounded border text-center placeholder:text-center'
             ></input>
           </div>
         </div>

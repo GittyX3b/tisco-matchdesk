@@ -11,7 +11,10 @@ const TimerBoard = () => {
   const [resetSignal, setResetSignal] = useState(0);
 
   const ppm = config.periodsPerMatch;
+  const pna = config.periodNames[ppm];
   const pn = config.periodNow;
+
+  const periodDescription = pn + '.' + pna;
 
   const handleTimesUp = useCallback(() => {
     stopTime();
@@ -32,34 +35,38 @@ const TimerBoard = () => {
 
   return (
     <article className={`tisco-tile grid grow grid-cols-[1fr_1fr_4fr_1fr_1fr]`}>
-      <span className='tile-heading col-start-3 m-auto'>Spielzeit</span>
-      <CountDownTimer
-        initSec={config.minutesPerPeriod * 60}
-        isRunning={time.on}
-        className={`font-lato-black col-start-3 m-auto flex h-min w-full justify-evenly text-[10rem] leading-tight ${!time.on ? 'text-tisco-red' : ''}`}
-        onTimesUp={handleTimesUp}
-        resetSign={resetSignal}
-      />
-      {!time.over ? (
-        <button
-          className={`btn btn-xl col-start-3 ${time.on ? 'btn-red' : 'btn-green'}`}
-          onClick={!gamePending ? toggleTime : startNextPeriod}
-        >
-          {time.on ? (
-            <div className='flex w-full items-center justify-center'>
-              <Pause />
-              <span className='p-2'>Stop</span>
-            </div>
-          ) : (
-            <span className='flex w-full items-center justify-center'>
-              {gamePending ? <ArrowUpFromDot /> : <Play />}
-              <span className='p-2'>Start</span>
-            </span>
-          )}
-        </button>
-      ) : (
-        <div className='font-lato-black col-start-3 m-auto pb-3 text-4xl'>SPIELENDE</div>
-      )}
+      <div className='col-start-3 flex max-h-[22rem] flex-col justify-between'>
+        <span className='tile-heading flex justify-center'>Spielzeit</span>
+
+        <span className='flex justify-center text-lg lg:text-2xl'>{periodDescription}</span>
+        <CountDownTimer
+          initSec={config.minutesPerPeriod * 60}
+          isRunning={time.on}
+          className={`font-lato-black flex h-min w-full justify-evenly text-[6rem] leading-tight lg:text-[10rem] ${!time.on ? 'text-tisco-red' : ''}`}
+          onTimesUp={handleTimesUp}
+          resetSign={resetSignal}
+        />
+        {!time.over ? (
+          <button
+            className={`btn btn-xl w-full ${time.on ? 'btn-red' : 'btn-green'}`}
+            onClick={!gamePending ? toggleTime : startNextPeriod}
+          >
+            {time.on ? (
+              <div className='flex w-full items-center justify-center'>
+                <Pause />
+                <span className='p-2'>Stop</span>
+              </div>
+            ) : (
+              <span className='flex w-full items-center justify-center'>
+                {gamePending ? <ArrowUpFromDot /> : <Play />}
+                <span className='p-2'>Start</span>
+              </span>
+            )}
+          </button>
+        ) : (
+          <div className='font-lato-black col-start-3 m-auto pb-3 text-4xl'>SPIELENDE</div>
+        )}
+      </div>
     </article>
   );
 };

@@ -1,5 +1,5 @@
 .tisco-tile {
-  @apply rounded-md bg-white p-5 shadow-lg;
+  @apply rounded-md bg-white p-2 py-5 shadow-lg md:p-5 md:py-8;
 }
 
 .tile-heading {
