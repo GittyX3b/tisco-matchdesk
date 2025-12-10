@@ -20,7 +20,10 @@ export const ConfigModal = () => {
               .trim()
               .split(/[ ,.;<>]+/) // split by space, comma, dot, semicolon, <, or multiple together
               .map(Number) // convert each string to number
-              .filter((n) => !isNaN(n)), // remove any NaN
+              .filter((n) => !isNaN(n)) // remove any NaN
+              .sort(function (a, b) {
+                return a - b;
+              }), // sort numbers
           ),
         ],
       }));

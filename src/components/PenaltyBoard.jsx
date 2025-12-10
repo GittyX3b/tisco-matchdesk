@@ -20,7 +20,7 @@ const PenaltyBoard = () => {
     team: '',
     playerNumber: '',
     color: 'green' | 'yellow' | 'red',
-    penaltyMinutes: '',
+    penaltyMinutes: 0,
   });
   const [penalties, setPenalties] = useState([]);
 
@@ -29,6 +29,7 @@ const PenaltyBoard = () => {
       ? setBtnActive((p) => ({ ...p, home: true, away: false }))
       : setBtnActive((p) => ({ ...p, home: false, away: true }));
     setPenaltyCard((p) => ({ ...p, team: teamname }));
+    setPenaltyCard((prev) => ({ ...prev, playerNumber: '' }));
   };
 
   const handleCardClick = (cardcolor) => {
@@ -76,6 +77,30 @@ const PenaltyBoard = () => {
     setPenalties((prev) => prev.filter((penalty) => penalty.id !== penaltyId));
   };
 
+  const createPlayerButtons = (numbersArray) => {
+    return numbersArray.map((nr) => (
+      <button
+        className='btn'
+        key={nr}
+        onClick={() => setPenaltyCard((prev) => ({ ...prev, playerNumber: nr }))}
+      >
+        {nr}
+      </button>
+    ));
+  };
+
+  const createMinutesButtons = (numbersArray) => {
+    return numbersArray.map((val) => (
+      <button
+        className='btn'
+        key={val}
+        onClick={() => setPenaltyCard((prev) => ({ ...prev, penaltyMinutes: val }))}
+      >
+        {val}
+      </button>
+    ));
+  };
+
   return (
     <article className='tisco-tile tex-tisco-navy grow'>
       <span className='tile-heading flex justify-center'>Strafzeiten</span>
@@ -117,44 +142,62 @@ const PenaltyBoard = () => {
           ROT
         </button>
 
-        <div className='wrap col-span-6 flex justify-between gap-3 md:flex-col lg:flex-row'>
-          <div className='input-group bg-tisco-light grid grow rounded p-4'>
-            <label htmlFor='penaltyMinutes'>Strafzeit:</label>
-            <input
-              id='penaltyMinutes'
-              name='penaltyMinutes'
-              type={btnActive.red ? 'text' : 'number'}
-              min={0}
-              step={1}
-              value={PenaltyCard.penaltyMinutes}
-              onChange={(e) =>
-                setPenaltyCard((p) => ({ ...p, penaltyMinutes: parseInt(e.target.value) || 0 }))
-              }
-              placeholder='in Minuten, z.B. 2'
-              className='border-tisco-navy w-full rounded border text-center placeholder:text-center'
-            ></input>
-          </div>
-
-          <div className='input-group bg-tisco-light grid grow rounded p-4'>
-            <label htmlFor='penaltyPlayerNumber'>Rückennummer:</label>
-            <input
-              id='penaltyPlayerNumber'
-              name='penaltyPlayerNumber'
-              type='number'
-              min={0}
-              step={1}
-              value={PenaltyCard.playerNumber}
-              onChange={(e) =>
-                setPenaltyCard((p) => ({ ...p, playerNumber: parseInt(e.target.value) || 0 }))
-              }
-              placeholder='z.B. 8'
-              className='border-tisco-navy w-full rounded border text-center placeholder:text-center'
-            ></input>
-          </div>
+        <div className='wrap col-span-6 grid grid-cols-[1fr_1fr] gap-3'>
+          {(btnActive.green || btnActive.yellow || btnActive.red) && (
+            <div className='input-group bg-tisco-light col-start-1 grow rounded p-4'>
+              <label htmlFor='penaltyMinutes'>Strafzeit:</label>
+              <input
+                id='penaltyMinutes'
+                name='penaltyMinutes'
+                type={btnActive.red ? 'text' : 'number'}
+                min={0}
+                step={1}
+                value={PenaltyCard.penaltyMinutes}
+                onChange={(e) =>
+                  setPenaltyCard((p) => ({ ...p, penaltyMinutes: parseInt(e.target.value) || 0 }))
+                }
+                placeholder='in Minuten, z.B. 2'
+                className='border-tisco-navy w-full rounded border text-center placeholder:text-center'
+              ></input>
+              <div className='grid w-full grid-cols-4 gap-3 pt-3'>
+                {btnActive.green && createMinutesButtons([1, 2, 3, 4])}
+                {btnActive.yellow && createMinutesButtons([2, 3, 5, 10])}
+              </div>
+            </div>
+          )}
+          {(btnActive.home || btnActive.away) && (
+            <div className='input-group bg-tisco-light col-start-2 grow rounded p-4'>
+              <label htmlFor='penaltyPlayerNumber'>Rückennummer:</label>
+              <input
+                id='penaltyPlayerNumber'
+                name='penaltyPlayerNumber'
+                type='number'
+                min={0}
+                step={1}
+                value={PenaltyCard.playerNumber}
+                onChange={(e) =>
+                  setPenaltyCard((p) => ({
+                    ...p,
+                    playerNumber: parseInt(e.target.value) || null,
+                  }))
+                }
+                placeholder='z.B. 8'
+                className='border-tisco-navy w-full rounded border text-center placeholder:text-center'
+              ></input>
+              <div className='grid w-full grid-cols-4 gap-3 pt-3'>
+                {btnActive.home &&
+                  config.teamHomeNumbers.length > 0 &&
+                  createPlayerButtons(config.teamHomeNumbers)}
+                {btnActive.away &&
+                  config.teamAwayNumbers.length > 0 &&
+                  createPlayerButtons(config.teamAwayNumbers)}
+              </div>
+            </div>
+          )}
         </div>
         <button
           type='button'
-          className={`btn font-lato btn-blue col-span-6 col-start-1 text-lg ${!((btnActive.home || btnActive.away) && (btnActive.green || btnActive.yellow || btnActive.red)) && 'hidden'}`}
+          className={`btn font-lato btn-blue col-span-6 col-start-1 mb-15 text-lg ${!((btnActive.home || btnActive.away) && (btnActive.green || btnActive.yellow || btnActive.red)) && 'hidden'}`}
           onClick={() => createPenalty(PenaltyCard)}
         >
           <Plus /> hinzufügen
