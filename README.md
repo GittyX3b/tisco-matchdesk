@@ -2,6 +2,8 @@
 
 Monitoring matchtime, penalty times and game progress at teamsport encounters.
 
+![screencast_preview.gif](https://github.com/GittyX3b/tisco-matchdesk/blob/preview/screencast_preview.gif?raw=true)
+
 TISCO stands for Time & Score.
 
 ## Links
@@ -13,3 +15,6 @@ TISCO stands for Time & Score.
 ### Icons
 
 [Lucide](https://lucide.dev/guide/packages/lucide-react)
+
+
+*(-> dev in progress...)*
